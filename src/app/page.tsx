@@ -1,7 +1,7 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons"
+import { Check, ChevronsUpDown } from "lucide-react"
 
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button"
@@ -102,7 +102,7 @@ export function ProfileForm() {
     toast({
       title: "You submitted the following values:",
       description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+        <pre className="mt-2 w-[340px] rounded-md p-4">
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
@@ -128,7 +128,7 @@ export function ProfileForm() {
             </FormItem>
           )}
         />
-        <FormField
+         <FormField
           control={form.control}
           name="language"
           render={({ field }) => (
@@ -150,16 +150,13 @@ export function ProfileForm() {
                             (language) => language.value === field.value
                           )?.label
                         : "Select language"}
-                      <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
                 <PopoverContent className="w-[200px] p-0">
                   <Command>
-                    <CommandInput
-                      placeholder="Search framework..."
-                      className="h-9"
-                    />
+                    <CommandInput placeholder="Search framework..." />
                     <CommandEmpty>No framework found.</CommandEmpty>
                     <CommandGroup>
                       {languages.map((language) => (
@@ -170,15 +167,15 @@ export function ProfileForm() {
                             form.setValue("language", value)
                           }}
                         >
-                          {language.label}
-                          <CheckIcon
+                          <Check
                             className={cn(
-                              "ml-auto h-4 w-4",
+                              "mr-2 h-4 w-4",
                               language.value === field.value
                                 ? "opacity-100"
                                 : "opacity-0"
                             )}
                           />
+                          {language.label}
                         </CommandItem>
                       ))}
                     </CommandGroup>
